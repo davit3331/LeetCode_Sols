@@ -1,36 +1,28 @@
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        
 
         int c = 0;
-
         int d = 0;
-
         int index1 = 0;
         int index2 = 0;
 
         for (int i = 0; i < nums.length; ++i) {
-
             c = nums[i];
 
             for (int j = 0; j < nums.length; ++j) {
-
                     d = nums[j];
 
                     if ((d + c == target) && (i != j)) {
-
                          index1 = i;
                          index2 = j;
                     }
-
             }
         }
 
-            int [] array = new int[2];
+        int [] array = new int[2];
+        array[0] = index1;
+        array[1] = index2;
 
-            array[0] = index1;
-            array[1] = index2;
-
-            return array;
+        return array;
     }
 }
