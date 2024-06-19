@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+
+        if(x < 0) {
+            return false;
+        }
+        else if (x == 0) {
+            return true;
+        }
+        
+        else {
+              String s = "" + x;
+              String s2 = "";
+
+              for (int i = 1; i <= s.length(); ++i) {
+                    s2 += s.charAt(s.length() - i);
+              }
+                
+              if (s2.equals(s)) {
+                  return true;
+              }
+              else {
+                  return false;
+              }
+        }
+    }
+}
