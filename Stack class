@@ -1,0 +1,110 @@
+package STACKS;
+
+public class ss {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Stack s1 = new Stack();
+		s1.push(8);
+		s1.push(7);
+		s1.push(6);
+		s1.push(4);
+		s1.push(2);
+		s1.push(1);
+		
+		System.out.println("Original stack");
+		s1.printStack();
+		
+		SortedPush(s1, 5);
+		System.out.println("STACK AFTER");
+		s1.printStack();
+		
+	}
+
+	public static void SortedPush(Stack st, int item) {
+		
+		if(st.IsEmpty() || item <= st.peek().value) {
+			st.push(item);
+		}
+		else {
+			int x = st.pop().value;
+			SortedPush(st, item);
+			st.push(x);
+		}	
+	}
+}
+
+
+
+class Stack {
+		private Node top;    //the head basically
+		private int height;
+		
+		public Stack() {
+			height = 0;
+		}
+		
+		public class Node{
+			int value;
+			Node next;
+			
+			Node(int value){
+				this.value = value;
+			}
+		}
+		
+		public void printStack() {
+			Node temp = top;
+			
+			while (temp != null) {
+				System.out.println(temp.value);
+				temp = temp.next;
+			}
+		}
+		
+		public boolean IsEmpty(){
+			if (height == 0) return true;
+			
+			return false;
+			
+		}
+		public int getHeight() {
+			return height;
+			
+		}
+		
+		public void push(int value) {
+			Node newNode = new Node(value);
+			
+			if (height == 0) {
+				top = newNode;
+			}else {
+				newNode.next = top;
+				top = newNode;
+			}
+			height += 1;
+		}
+		
+		public Node pop() {
+			if (height == 0) return null;
+			
+			Node temp = top;
+			top = top.next;
+			temp.next = null;
+			
+			height -= 1;
+			return temp;
+		}
+		
+		public Node peek() {
+			if (height == 0) return null;
+			
+			Node temp = top;
+			
+			return temp;
+		}
+	
+	}
+
+
