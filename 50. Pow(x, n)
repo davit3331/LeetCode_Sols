@@ -1,0 +1,24 @@
+class Solution {
+    public double myPow(double x, int n) {
+        
+        if(n < 0){ //in case exponent is negative we need this block to convert exponent to positive, otherwise code won't work for negative n;
+            x = 1 / x;   //x^(-n) = (1/x)^n
+
+            n = -1 * (n+1);   //initially we just had n = -n, and no return statement bellow, this almost always works, but causes an overflow issue for n = -2*31, and negating this n results an overflow, so that's why we do n = -1*(n+1) and add a recursive call bellow
+            return x * myPow(x, n);
+        }
+        if(n==0) return 1;
+
+      
+        //n = 2*Math.floor(n/2) + r (where r is the remainder either {0,1})
+        //x^n = x^(2*Math.floor(n/2) + r) = (x^2)^(Math.floor(n/2)) * x^r = (x * x)^(Math.floor(n/2)) * x^r
+
+        double y = x * x;
+        double z = myPow(y, n/2); 
+        int r = n % 2;   //remember r can either be {0,1}
+
+        if (r == 1) z = z * x; //if r = 1, we multiply by x^r as shown above, else if r = 0 we multiply by 1, since x^0 = 1
+        return z;
+
+    }
+}
