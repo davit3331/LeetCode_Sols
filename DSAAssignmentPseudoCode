@@ -1,0 +1,22 @@
+Algorithm: Find-Saddle-Point(T)
+Pre-Cond: T is a binary tree.
+Post-Cond: returns the saddle point node in T (or null if it doesn't exist).
+1. (x, _, _) ← F(root[T], ∞)
+2. return x
+
+function F(r, minAncestorValue)
+Pre-Cond: r is the root of a binary tree, minAncestorValue is the minimum value of ancestors.
+Post-Cond: returns tuple (x, maxDescendant, minAncestorValue) where:
+           - x is the saddle point node in the subtree rooted at r.
+           - maxDescendant is the maximum value found in the subtree rooted at r.
+           - minAncestorValue is the minimum value from the ancestors passed down to r.
+
+3. if r = nil then return (null, -∞, ∞)
+4. (xL, maxL, _) ← F(left[r], minAncestorValue)      // Recursive call for left subtree
+5. (xR, maxR, _) ← F(right[r], minAncestorValue)     // Recursive call for right subtree
+6. maxDescendant ← max(r.value, maxL, maxR)          // Maximum in the current subtree
+7. if r.value ≤ minAncestorValue and r.value ≥ maxL and r.value ≥ maxR then
+       x ← r
+   else
+       x ← xL if xL ≠ null else xR                   // Choose the left or right saddle point if found
+8. return (x, maxDescendant, min(minAncestorValue, r.value))
