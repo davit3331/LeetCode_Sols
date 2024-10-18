@@ -1,0 +1,23 @@
+Algorithm findBalancedEdge(T):
+    Pre-Cond: A binary tree T with root r and n nodes
+    Post-Cond: A balanced edge such that removing it splits the tree into two subtrees with at most ⌈(2n - 1)/3⌉ nodes
+
+    1. Initialize minDifference = ∞  // keeping track of the best balanced edge
+    2. Initialize bestEdge = null    // Storing the best edge, temporerily set to null
+    3. Define a helper function postOrder(node):
+        4. If node is null, return 0
+        5. leftSize = postOrder(node.left)    // Recursively calculating the size of our left subtree
+        6. rightSize = postOrder(node.right)  // Recursively calculating the size of our right subtree
+        7. subtreeSize = 1 + leftSize + rightSize  // Calculating the size of current subtree
+        
+        8. remainingSize = n - subtreeSize   // Size of the tree if we cut the edge between node and its parent
+        9. maxPartSize = max(subtreeSize, remainingSize)  // Saving the larger of the 2 parts
+        
+        10. If maxPartSize < minDifference:
+            11. minDifference = maxPartSize
+            12. bestEdge = the edge between node and its parent
+
+        13. Return subtreeSize  // Returning the size of current subtree to parent
+
+    14. Call postOrder(root)    // Start post-order traversal from root
+    15. Return bestEdge         // Returning the balanced edge found
