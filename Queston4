@@ -1,0 +1,29 @@
+Skyline(buildings):
+    if buildings contains one building:
+        return the skyline of that building
+    mid = len(buildings) // 2
+    leftSkyline = Skyline(buildings[0:mid])
+    rightSkyline = Skyline(buildings[mid:])
+    return MergeSkylines(leftSkyline, rightSkyline)
+
+MergeSkylines(Skyline1, Skyline2):
+    i = j = 0
+    h1 = h2 = 0  # current heights from Skyline1 and Skyline2
+    result = []
+    
+    while i < len(Skyline1) and j < len(Skyline2):
+        if Skyline1[i].x < Skyline2[j].x:
+            x = Skyline1[i].x
+            h1 = Skyline1[i].height
+            maxHeight = max(h1, h2)
+            Append to result(x, maxHeight)
+            i += 1
+        else:
+            x = Skyline2[j].x
+            h2 = Skyline2[j].height
+            maxHeight = max(h1, h2)
+            Append to result(x, maxHeight)
+            j += 1
+
+    Append remaining skyline points from Skyline1 or Skyline2
+    return result
