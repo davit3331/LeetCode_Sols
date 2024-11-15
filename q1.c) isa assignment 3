@@ -1,0 +1,27 @@
+Algorithm RandomizedJugMatch(red_jugs, blue_jugs):
+    //Input: red_jugs - an array of red jugs, blue_jugs - an array of blue jugs
+    //Output: Pairs each red jug with its matching blue jug
+
+    1. If red_jugs or blue_jugs contains only one jug:
+         a. Pair the red jug with the blue jug and return.
+
+    2. Choose a random blue jug as the pivot_blue_jug.
+
+    3. Partition red_jugs into two groups:
+         a. smaller_red_jugs: all red jugs with volume smaller than pivot_blue_jug.
+         b. larger_red_jugs: all red jugs with volume larger than pivot_blue_jug.
+
+    4. Find the red jug that matches pivot_blue_jug by comparing volumes.
+         a. Let pivot_red_jug be the red jug that has the same volume as pivot_blue_jug.
+
+    5. Pair pivot_red_jug with pivot_blue_jug.
+
+    6. Recursively apply RandomizedJugMatch on:
+         a. smaller_red_jugs and all blue jugs smaller than pivot_blue_jug.
+         b. larger_red_jugs and all blue jugs larger than pivot_blue_jug.
+
+    7. Return the pairs of red and blue jugs.
+
+
+
+
