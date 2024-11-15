@@ -1,0 +1,38 @@
+Algorithm ClosestKtoMedian(S, K):
+    //Input: S - a set of n distinct numbers, K - an integer, where 1 ≤ K ≤ n
+    //Output: Returns the K elements in S closest to the median of S
+
+    Step 1: Find the Median
+        //1.1 Call a function that calculates the median of a set S, lets say MedianOfMedians(S).
+        //1.2 Store this median value as m.
+        m = MedianOfMedians(S)
+
+    Step 2: Calculate Absolute Differences
+        //2.1 Initialize an empty list D to store differences.
+        //2.2 For each element x in S:
+            a. Calculate the absolute difference |x - m|.
+            b. Append the difference |x - m| to list D.
+        D = [ ] //2.1 Initialize an empty list D to store differences.
+        i = 0;
+        for element x in S:  //2.2 For each element x in S: Calculate the absolute difference |x - m| and append the difference |x - m| to list D.
+            D[i] <- | x - m |
+            i <- i + 1
+        // At the end of this step, D contains the absolute differences of each element in S from the median m.
+
+    Step 3: Find the K-Smallest Differences
+        3.1 Use the Quickselect algorithm on D to find the K-th smallest difference.
+            // Quickselect will partition D so that the K smallest differences are on one side.
+        3.2 Store these K smallest differences as the target differences.
+        // After this step, we have identified the K smallest values in D that represent the elements in S closest to m.
+
+    Step 4: Select Elements Based on Differences
+        4.1 Initialize an empty list result to store the final K elements closest to the median.
+        4.2 For each element x in S:
+            a. Calculate the absolute difference diff = |x - m|.
+            b. If diff is one of the K smallest differences in target differences:
+                i. Append x to result.
+                ii. Remove diff from target differences to ensure we only select up to K elements.
+            // This ensures only the K elements with the smallest differences are chosen.
+
+    Step 5: Return Result
+        5.1 Return the list result, which contains the K elements in S closest to the median m.
