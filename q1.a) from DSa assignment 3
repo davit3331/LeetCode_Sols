@@ -1,0 +1,12 @@
+Algorithm Red-Blue-Pairing(Red, Blue)
+    Input: Two sets of jugs, Red[1..n] and Blue[1..n], with each red jug having a unique corresponding blue jug of the same volume
+    Output: A list of pairs (Ri, Bj), where Ri ∈ Red and Bj ∈ Blue, such that the volumes of Ri and Bj are equal
+    
+    1. pairs ← []  // Initializing an empty list to store the pairs
+    2. for each red jug Ri in Red do
+          3. for each blue jug Bj in Blue do
+                4. if Ri.volume == Bj.volume then
+                      5. Append (Ri, Bj) to pairs
+                      6. Remove Bj from Blue  // We remove in order to prevent re-pairing this blue jug
+                      7. break  // break out of loop to move to the next red jug once a match is found
+    8. return pairs
