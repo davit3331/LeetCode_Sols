@@ -1,0 +1,11 @@
+Algorithm Feasible-Schedule(S, n)
+  //Input: A set S of n jobs, where each job J_k has a processing time t_k and a deadline d_k
+  //Output: A feasible schedule of jobs if it exists; otherwise, "No feasible schedule exists"
+
+  1. Sort S by deadline d_k in non-decreasing order //(for example use Merge Sort, but can use other sorting algorithms too)
+  2. current_time ← 0                               //initialise current_time
+  3. for each job J_k in S do                       //loop through all the jobs in S
+        current_time ← current_time + t_k           //incrementing current time
+        if current_time > d_k then                  //if current time exceeds the deadline then no feasible solution exists
+            return "No feasible schedule exists"
+  4. return S  // The sorted list represents the feasible schedule if no deadlines are missed
