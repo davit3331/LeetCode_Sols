@@ -1,0 +1,19 @@
+Algorithm Maximum-Profit-Schedule(J, n)
+    //Pre-Cond: J = {J_i = (t_i, p_i, d_i) | i = 1..n} is a set of n jobs.
+    //Post-Cond: Output a schedule S[1..n] that maximizes the profit.
+
+    Sort J in descending order of profit p_i // for example use merge sort but could use other sorting algorithms
+    S ← [None, None, ..., None] // Schedule array of size n, initially empty
+    TotalProfit ← 0 // initialize totalProfit to 0
+
+    for each job J_i in J do
+        for t = min(d_i, n) downto (min(d_i,n) - ti + 1) do //The loop iterates through potential time slots for job, starting from the latest possible slot (either the job's deadline or the # of slots n)
+            if all S[t] is None for timeslots in range(min(d-i,n) - ti + 1)  then
+                S[t] ← J_i
+                TotalProfit ← TotalProfit + p_i
+            end if
+        end for
+    end for
+
+    return S, TotalProfit
+end
