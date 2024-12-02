@@ -1,0 +1,31 @@
+Algorithm Bottleneck-Spanning-Tree(G)
+    //Input: Connected graph G = (V, E) with edge weights
+    //Output: Spanning tree T of G with minimal bottleneck value
+    
+    1. E_current ← E
+    2. W ← Set of unique weights in E
+    
+    3. While |W| > 1 do
+       a. b ← Median of W (using linear-time selection)
+       
+       b. Partition E_current into:
+           E_low ← { e ∈ E_current | weight(e) < b }
+           E_equal ← { e ∈ E_current | weight(e) = b }
+           E_high ← { e ∈ E_current | weight(e) > b }
+       
+       c. If Bottleneck-Check(G, b) returns "Yes" then
+             E_current ← E_low ∪ E_equal
+             W ← Unique weights in E_current
+          Else
+             E_current ← E_high
+             W ← Unique weights in E_current
+       End If
+    
+    4. b_star ← the single remaining weight in W
+    5. E_final ← { e ∈ E | weight(e) ≤ b_star }
+    6. G' ← (V, E_final)
+    
+    7. Construct spanning tree T from G' using DFS or BFS
+    8. Return T
+
+
