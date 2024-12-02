@@ -1,0 +1,26 @@
+Algorithm Bottleneck-Check(G, b)
+    //Input: Graph G = (V, E) with edge weights, real number b
+    //Output: "Yes" if bottleneck value ≤ b, "No" otherwise
+    
+    1. E' ← ∅
+    2. For each edge e ∈ E do
+           If weight(e) ≤ b then
+               E' ← E' ∪ {e}
+    3. G' ← (V, E')
+    4. For each vertex v ∈ V do
+           Visited[v] ← False
+    5. Choose any vertex s ∈ V
+    6. DFS(G', s)
+    7. If Visited[v] = True for all v ∈ V then
+           Output "Yes"
+       Else
+           Output "No"
+
+
+  Procedure DFS(G', v)
+       Visited[v] ← True
+       For each u adjacent to v in G' do
+           If Visited[u] = False then
+               DFS(G', u)
+
+
