@@ -1,0 +1,45 @@
+Algorithm Color-Constrained-Dijkstra(G, w, c, s, K)
+      Input:
+          G = (V, E) - weighted directed graph
+          w(u, v) - edge weights
+          c(v) - The color of vertex v (red or blue)
+          s - source vertex
+          K - maximum number of red nodes allowed on the path
+      Output:
+          For each vertex v ∈ V, shortest path length from s to v
+          using at most K red nodes.
+      
+      1. Initialize:
+          For each v ∈ V do
+              For r = 0 to K do
+                  d[v][r] ← ∞
+                  π[v][r] ← NIL
+          If c(s) = red then
+              d[s][1] ← 0
+              Insert (s, 1) into Q with priority 0
+          Else
+              d[s][0] ← 0
+              Insert (s, 0) into Q with priority 0
+      
+      2. While Q is not empty do
+          (u, r_u) ← Extract-Min(Q)
+          For each edge (u, v) ∈ E do
+              If c(v) = red then
+                  r_v ← r_u + 1
+              Else
+                  r_v ← r_u
+              If r_v ≤ K then
+                  If d[v][r_v] > d[u][r_u] + w(u, v) then
+                      d[v][r_v] ← d[u][r_u] + w(u, v)
+                      π[v][r_v] ← u
+                      Insert (v, r_v) into Q with priority d[v][r_v]
+                  End If
+              End If
+          End For
+      End While
+      
+      3. For each v ∈ V do
+          Find the minimal d[v][r] for r = 0 to K
+          Output the shortest distance and corresponding path
+      End For
+
