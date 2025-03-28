@@ -1,0 +1,40 @@
+class Solution {
+    public boolean isValid(String s) {
+        
+        //creating a char array called stack
+        char[] stack = new char[s.length()];
+        int top = -1;
+
+        //looping through the entire string
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            //If its an opening bracket, we first push all the opening brackets in the stack
+            if (ch == '(' || ch == '{' || ch == '[') {
+                top += 1;
+                stack[top] = ch; // push
+
+            } else { //this is the time when we start to encounter closing brackets
+
+                if (top == -1) return false; /*We right away return false here, because the stack is emtpy (no opening brackets so far) but we have a closing bracket
+                which makes it not valid */
+
+                char open = stack[top]; // pop the most recent open bracket
+                top -= 1; //take the index to the previous open bracket (2nd most recent open bracket
+                
+                //Second most recent open bracket will be compared to the second closing bracket we encounter 
+                //if the stack is valid we should be able to remove all pairs
+
+                if ((ch == ')' && open != '(') ||
+                    (ch == '}' && open != '{') ||
+                    (ch == ']' && open != '[')) {
+                    return false;
+                }
+            }
+        }
+
+        return top == -1; // stack should be empty if valid
+
+
+    }
+}
